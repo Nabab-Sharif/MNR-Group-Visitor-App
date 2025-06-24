@@ -26,37 +26,38 @@
 	</head>
 	<body>
 		<div id="root"></div>
-		<button id="installBtn">Install App</button>
-		<script type="module" src="/src/main.jsx"></script>
-		<script>
-			// Register service worker
-			if ('serviceWorker' in navigator) {
-				navigator.serviceWorker.register('service-worker.js');
-			}
+		
+		<button id="installBtn" style="display:none;position:fixed;bottom:16px;right:16px;z-index:1000;">
+    Install App
+  </button>
+<script type="module" src="/src/main.jsx"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js');
+  }
 
-			// Handle install prompt
-			let deferredPrompt;
-			const installBtn = document.getElementById('installBtn');
-			window.addEventListener('beforeinstallprompt', (e) => {
-				e.preventDefault();
-				deferredPrompt = e;
-				installBtn.style.display = 'block';
-			});
+  let deferredPrompt;
+  const installBtn = document.getElementById('installBtn');
 
-			installBtn.addEventListener('click', async () => {
-				if (deferredPrompt) {
-					deferredPrompt.prompt();
-					const { outcome } = await deferredPrompt.userChoice;
-					if (outcome === 'accepted') {
-						installBtn.style.display = 'none';
-					}
-					deferredPrompt = null;
-				}
-			});
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    installBtn.style.display = 'block';
+  });
 
-			window.addEventListener('appinstalled', () => {
-				installBtn.style.display = 'none';
-			});
-		</script>
+  installBtn.addEventListener('click', () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(() => {
+        deferredPrompt = null;
+        installBtn.style.display = 'none';
+      });
+    }
+  });
+
+  window.addEventListener('appinstalled', () => {
+    installBtn.style.display = 'none';
+  });
+</script>
 	</body>
 </html>
