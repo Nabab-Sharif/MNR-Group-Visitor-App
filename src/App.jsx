@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Home, UserPlus, List, Camera, FileText, CalendarDays, BarChart3, Download } from 'lucide-react';
@@ -22,6 +22,31 @@ const AppLayout = ({ children }) => {
     { path: '/add-visitor', label: 'Add Visitor', icon: <UserPlus size={24} /> },
     { path: '/visitor-list', label: 'Visitor List', icon: <List size={24} /> },
   ];
+
+  // PWA install prompt logic
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [showInstall, setShowInstall] = useState(false);
+
+  useEffect(() => {
+    const handler = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setShowInstall(true);
+    };
+    window.addEventListener('beforeinstallprompt', handler);
+    return () => window.removeEventListener('beforeinstallprompt', handler);
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        setShowInstall(false);
+        setDeferredPrompt(null);
+      }
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-slate-50 flex flex-col">
@@ -71,6 +96,11 @@ const AppLayout = ({ children }) => {
               </Button>
             </Link>
           </div>
+          {showInstall && (
+            <Button onClick={handleInstallClick} variant="secondary" className="ml-4">
+              Install App
+            </Button>
+          )}
         </div>
       </header>
 
