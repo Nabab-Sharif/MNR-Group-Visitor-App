@@ -18,7 +18,7 @@ const VisitorFormActions = ({ onReset }) => {
     <div className="flex justify-end space-x-4 pt-4">
        <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button type="button" variant="outline" className="text-black border-slate-600 bg-slate-600 hover:bg-rose-700 hover:text-black">
+          <Button type="button" variant="outline" className="text-yellow-50 border-rose-700 bg-slate-600 hover:bg-rose-700 hover:text-black">
             <Trash2 className="mr-2 h-4 w-4" /> Reset
           </Button>
         </AlertDialogTrigger>
