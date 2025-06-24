@@ -6,9 +6,57 @@
 		<meta name="generator" content="MNR Sweaters Ltd" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>MNR Sweaters Ltd Visitor App</title>
+		<link rel="manifest" href="manifest.json">
+		<style>
+			#installBtn {
+				display: none;
+				position: fixed;
+				bottom: 20px;
+				right: 20px;
+				z-index: 1000;
+				background: #0078d7;
+				color: white;
+				border: none;
+				border-radius: 5px;
+				padding: 10px 20px;
+				font-size: 16px;
+				cursor: pointer;
+			}
+		</style>
 	</head>
 	<body>
 		<div id="root"></div>
+		<button id="installBtn">Install App</button>
 		<script type="module" src="/src/main.jsx"></script>
+		<script>
+			// Register service worker
+			if ('serviceWorker' in navigator) {
+				navigator.serviceWorker.register('service-worker.js');
+			}
+
+			// Handle install prompt
+			let deferredPrompt;
+			const installBtn = document.getElementById('installBtn');
+			window.addEventListener('beforeinstallprompt', (e) => {
+				e.preventDefault();
+				deferredPrompt = e;
+				installBtn.style.display = 'block';
+			});
+
+			installBtn.addEventListener('click', async () => {
+				if (deferredPrompt) {
+					deferredPrompt.prompt();
+					const { outcome } = await deferredPrompt.userChoice;
+					if (outcome === 'accepted') {
+						installBtn.style.display = 'none';
+					}
+					deferredPrompt = null;
+				}
+			});
+
+			window.addEventListener('appinstalled', () => {
+				installBtn.style.display = 'none';
+			});
+		</script>
 	</body>
 </html>
