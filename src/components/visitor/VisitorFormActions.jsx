@@ -18,7 +18,7 @@ const VisitorFormActions = ({ onReset }) => {
     <div className="flex justify-end space-x-4 pt-4">
        <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button type="button" variant="outline" className="text-slate-300 border-slate-600 hover:bg-slate-700 hover:text-white">
+          <Button type="button" variant="outline" className="text-black border-slate-600 bg-slate-600 hover:bg-rose-700 hover:text-black">
             <Trash2 className="mr-2 h-4 w-4" /> Reset
           </Button>
         </AlertDialogTrigger>
@@ -37,8 +37,8 @@ const VisitorFormActions = ({ onReset }) => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-      <Button type="submit" className="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white font-semibold shadow-lg">
-        <Save className="mr-2 h-4 w-4" /> Save Information
+      <Button type="submit" className="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-black font-semibold shadow-lg">
+        <Save className="mr-2 h-4 w-4" /> Submit Data
       </Button>
     </div>
   );
