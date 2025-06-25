@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import * as XLSX from 'xlsx';
 
+
 const AppLayout = ({ children }) => {
   const location = useLocation();
   const logoUrl = "https://storage.googleapis.com/hostinger-horizons-assets-prod/924959b3-e014-4736-8457-bb0ebc34acf2/d5218e41ff2a37fdb03a046db22ffe47.jpg";
@@ -23,31 +24,7 @@ const AppLayout = ({ children }) => {
     { path: '/visitor-list', label: 'Visitor List', icon: <List size={24} /> },
   ];
 
-  // PWA install prompt logic
-  const [deferredPrompt, setDeferredPrompt] = useState(null);
-  const [showInstall, setShowInstall] = useState(false);
-
-  useEffect(() => {
-    const handler = (e) => {
-      e.preventDefault();
-      setDeferredPrompt(e);
-      setShowInstall(true);
-    };
-    window.addEventListener('beforeinstallprompt', handler);
-    return () => window.removeEventListener('beforeinstallprompt', handler);
-  }, []);
-
-  const handleInstallClick = async () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === 'accepted') {
-        setShowInstall(false);
-        setDeferredPrompt(null);
-      }
-    }
-  };
-
+ 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-slate-50 flex flex-col">
       <header className="bg-slate-900/80 backdrop-blur-md shadow-lg sticky top-0 z-50">
@@ -65,7 +42,9 @@ const AppLayout = ({ children }) => {
                 MNR Sweaters Ltd.
               </h1>
             </Link>
+
           </motion.div>
+
           <nav className="hidden md:flex space-x-2 items-center">
             <TooltipProvider>
               {navItems.map((item) => (
@@ -95,12 +74,7 @@ const AppLayout = ({ children }) => {
                 <Home size={24} />
               </Button>
             </Link>
-          </div>
-          {showInstall && (
-            <Button onClick={handleInstallClick} variant="secondary" className="ml-4">
-              Install App
-            </Button>
-          )}
+          </div>  
         </div>
       </header>
 
@@ -172,6 +146,7 @@ function handleImportVisitors(e) {
       alert('Invalid or empty Excel file.');
       return;
     }
+
     // Map Excel rows to visitor objects
     const importedVisitors = dataRows.map(row => ({
       cardNo: row[0] || '',
@@ -184,6 +159,7 @@ function handleImportVisitors(e) {
       outTime: row[7] || '',
       id: Date.now().toString() + Math.random().toString(36).slice(2)
     }));
+
     // Merge with existing visitors
     const existing = JSON.parse(localStorage.getItem('visitors') || '[]');
     localStorage.setItem('visitors', JSON.stringify([...existing, ...importedVisitors]));
@@ -202,6 +178,7 @@ const HomePage = () => {
   const presentVisitors = visitors.filter(v => !v.outTime);
   const checkoutVisitors = visitors.filter(v => v.outTime);
 
+
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -209,7 +186,7 @@ const HomePage = () => {
       transition={{ duration: 0.5 }}
       className="text-center"
     >
-      <h2 className="text-4xl font-bold mb-6 ">Welcome to the Visitor Management System</h2>
+      <h2 className="text-4xl font-bold mb-6 ">Welcome to MNR Sweaters Ltd Visitor Management System</h2>
       <p className="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
         This application is designed to efficiently manage visitor information for MNR Sweaters Ltd. You can easily add new visitors, view lists, and manage their details.
       </p>
@@ -285,6 +262,7 @@ const HomePage = () => {
             <span className="text-lg font-bold text-pink-400">{checkoutVisitors.length}</span>
           </Link>
         </div>
+
         {/* Show present visitor list if selected */}
         {showPresent && (
           <div className="mt-6 bg-slate-900 rounded-lg p-4 border border-green-700 max-w-2xl mx-auto">

@@ -1,31 +1,43 @@
-// Basic service worker for offline support (cache all GET requests)
 const CACHE_NAME = 'visitorp-cache-v1';
+const urlsToCache = [
+  '/',
+  '/index.html',
+  '/manifest.json',
+  '/icons/icon-192.png',
+  '/icons/icon-512.png'
+];
 
+// Install: cache static assets
 self.addEventListener('install', event => {
-    self.skipWaiting();
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(urlsToCache);
+    })
+  );
+  self.skipWaiting(); // Activate without waiting
 });
 
+// Activate: clean old cache
 self.addEventListener('activate', event => {
-    self.clients.claim();
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(name => {
+          if (name !== CACHE_NAME) {
+            return caches.delete(name);
+          }
+        })
+      );
+    })
+  );
+  self.clients.claim();
 });
 
+// Fetch: serve cached assets
 self.addEventListener('fetch', event => {
-    if (event.request.method !== 'GET') return;
-    event.respondWith(
-        caches.open(CACHE_NAME).then(cache =>
-            cache.match(event.request).then(response =>
-                response ||
-                fetch(event.request).then(networkResponse => {
-                    if (
-                        networkResponse &&
-                        networkResponse.status === 200 &&
-                        networkResponse.type === 'basic'
-                    ) {
-                        cache.put(event.request, networkResponse.clone());
-                    }
-                    return networkResponse;
-                }).catch(() => response)
-            )
-        )
-    );
+  event.respondWith(
+    caches.match(event.request).then(response => {
+      return response || fetch(event.request);
+    })
+  );
 });
