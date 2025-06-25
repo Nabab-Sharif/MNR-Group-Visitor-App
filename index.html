@@ -6,51 +6,11 @@
 		<meta name="generator" content="MNR Sweaters Ltd" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>MNR Sweaters Ltd Visitor App</title>
-		<link rel="manifest" href="/public/manifest.json">	
-			#installBtn {
-				display: none;
-				position: fixed;
-				bottom: 20px;
-				right: 20px;
-				z-index: 1000;
-				background: #03233d;
-				color: white;
-				border: none;
-				border-radius: 5px;
-				padding: 10px 20px;
-				font-size: 16px;
-				cursor: pointer;
-			}
-		</style> -->
+		<link rel="manifest" href="/public/manifest.json">		
 	</head>
 
 	<body>
 		<div id="root"></div>
 		<script type="module" src="/src/main.jsx"></script>
-		
-		  if ('serviceWorker' in navigator) {
-		    navigator.serviceWorker.register('/service-worker.js');
-		  }
-		  let deferredPrompt;
-		  const installBtn = document.getElementById('installBtn');
-		  window.addEventListener('beforeinstallprompt', (e) => {
-		    e.preventDefault();
-		    deferredPrompt = e;
-		    installBtn.style.display = 'block';
-		  });
-		  installBtn.addEventListener('click', () => {
-		    if (deferredPrompt) {
-		      deferredPrompt.prompt();
-		      deferredPrompt.userChoice.then(() => {
-		        deferredPrompt = null;
-		        installBtn.style.display = 'none';
-		      });
-		    }
-		  });
-		  window.addEventListener('appinstalled', () => {
-		    installBtn.style.display = 'none';
-		  });
-		</script>
-		 -->
 	</body>
 </html>
