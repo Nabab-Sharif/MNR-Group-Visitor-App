@@ -208,6 +208,7 @@ const CalendarView = () => {
                 <span className="text-xs text-slate-400 mt-2 font-semibold tracking-wide group-hover:text-fuchsia-300 transition-colors text-center" style={{ writingMode: "vertical-lr", transform: "rotate(180deg)" }}>
                   {date.slice(5)}
                 </span>
+                
               </div>
             );
           })}
