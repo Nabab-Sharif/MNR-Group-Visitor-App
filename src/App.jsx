@@ -193,7 +193,7 @@ const HomePage = () => {
       <div className="grid md:grid-cols-3 gap-6 mb-12">
         <FeatureCard
           icon={<UserPlus size={32} className="text-purple-400" />}
-          title="Add New Visitor"
+          title="Add Visitor"
           description="Easily add new visitor details like name, phone, purpose of visit, etc."
           linkTo="/add-visitor"
         />
