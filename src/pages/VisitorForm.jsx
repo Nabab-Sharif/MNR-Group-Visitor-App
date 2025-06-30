@@ -18,6 +18,7 @@ const VisitorForm = () => {
   const [photo, setPhoto] = useState(null);
   const [cardNo, setCardNo] = useState('');
 
+  
   const resetForm = () => {
     setName('');
     setPhone('');
