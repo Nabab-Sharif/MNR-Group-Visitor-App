@@ -34,21 +34,23 @@ const VisitorListHeader = ({
         <Button 
           id="exportAllVisitorsButton"
           variant="outline" 
-          className="text-slate-300 border-slate-600 hover:bg-slate-700 hover:text-white flex-1 sm:flex-none" 
+          className="text-slate-800 border-slate-600 hover:bg-slate-700 hover:text-white flex-1 sm:flex-none" 
           onClick={onExportAll}
           disabled={allVisitorsCount === 0}
         >
           <FileText className="mr-2 h-4 w-4" /> All ({allVisitorsCount})
         </Button>
+
         <Button 
           id="exportTodayVisitorsButton"
           variant="outline" 
-          className="text-slate-300 border-slate-600 hover:bg-slate-700 hover:text-white flex-1 sm:flex-none" 
+          className="text-slate-800 border-slate-600 hover:bg-slate-700 hover:text-white flex-1 sm:flex-none" 
           onClick={onExportToday}
           disabled={todayVisitorsCount === 0}
         >
           <Download className="mr-2 h-4 w-4" /> Today's ({todayVisitorsCount})
         </Button>
+
       </div>
     </div>
   );
