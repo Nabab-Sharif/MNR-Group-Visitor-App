@@ -99,7 +99,8 @@ const VisitorCard = ({ visitor, companyLogoUrl = "https://storage.googleapis.com
   };
   
   return (
-    <div className="p-0">
+    <div className="p-10">
+
       <div ref={cardRef} className="visitor-card-print-area bg-gradient-to-br from-slate-100 to-slate-200 text-slate-800 p-6 rounded-lg shadow-xl w-[350px] mx-auto border border-slate-300">
         <div className="flex flex-col items-center mb-4 pb-4 border-b border-slate-300">
           {companyLogoUrl && <img src={companyLogoUrl} alt={`${companyName} Logo`} className="logo-image h-16 w-16 object-cover rounded-full mb-2 shadow-md" />}
@@ -164,6 +165,7 @@ const VisitorCard = ({ visitor, companyLogoUrl = "https://storage.googleapis.com
           <Printer className="mr-2 h-4 w-4" /> Print Card
         </Button>
       </div>
+
     </div>
   );
 };
