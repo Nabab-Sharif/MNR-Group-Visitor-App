@@ -99,7 +99,7 @@ const VisitorCard = ({ visitor, companyLogoUrl = "https://storage.googleapis.com
   };
   
   return (
-    <div className="p-10">
+    <div className="pb-10 pt-10">
 
       <div ref={cardRef} className="visitor-card-print-area bg-gradient-to-br from-slate-100 to-slate-200 text-slate-800 p-6 rounded-lg shadow-xl w-[350px] mx-auto border border-slate-300">
         <div className="flex flex-col items-center mb-4 pb-4 border-b border-slate-300">
