@@ -19,10 +19,15 @@ const VisitorFormFields = ({ formData }) => {
   const [toMeetOptions, setToMeetOptions] = React.useState(() => {
     const saved = localStorage.getItem(TO_MEET_KEY);
     return saved ? JSON.parse(saved) : [
-      "Moin Uddin, Head of Admin",
       "Md. Mesbah Uddin Ahmed, COO",
+      "Moin Uddin, Head of Admin",
       "Md. Rafiqul Islam, GM (Merchandising)",
       "Sharafat Hossain Munna, GM (Compliance)",
+      "Abdur Rahman, GM (Production)",
+      "Ali-Manab, GM (Production)",
+      "Khondaker Reza Ahmed, DGM (HR,Admin & Compliancen)",
+      "Md. Abul Kalam, DGM (Production)",
+      "Md. Masud Rana, AGM (HR,Admin & Compliance)",
       "Md. Obaydur Rahman, Manager (HR,Admin & Compliance)",
     ];
   });
