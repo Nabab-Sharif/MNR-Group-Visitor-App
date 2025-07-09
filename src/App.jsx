@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Home,LayoutDashboard, UserPlus, List, Camera, FileText, CalendarDays, BarChart3, Download } from 'lucide-react';
+import { Home, LayoutDashboard, UserPlus, List, Camera, FileText, CalendarDays, BarChart3, Download } from 'lucide-react';
 import VisitorForm from '@/pages/VisitorForm';
 import VisitorList from '@/pages/VisitorList';
 import CalendarView from '@/pages/CalendarView';
@@ -17,13 +17,13 @@ import * as XLSX from 'xlsx';
 const AppLayout = ({ children }) => {
   const location = useLocation();
   const logoUrl = "/icons/icon.svg";
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
     { path: '/', label: 'Add Visitor', icon: <UserPlus size={24} /> },
-    { path: '/dashboard', label: 'Dashboard', icon: <LayoutDashboard size={24}  /> },
+    { path: '/dashboard', label: 'Dashboard', icon: <LayoutDashboard size={24} /> },
     { path: '/visitor-list', label: 'Visitor List', icon: <List size={24} /> },
   ];
-
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-slate-50 flex flex-col">
@@ -35,16 +35,15 @@ const AppLayout = ({ children }) => {
             transition={{ duration: 0.5 }}
             className="flex items-center"
           >
-            {/* Logo links to home */}
             <Link to="/" className="flex items-center">
               <img src={logoUrl} alt="MNR Sweaters Ltd. Logo" className="h-10 w-10 object-cover rounded-full mr-3 shadow-md" />
               <h1 className="text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">
                 MNR Sweaters Ltd.
               </h1>
             </Link>
-
           </motion.div>
 
+          {/*....................... Desktop Navigation Start Here ......................... */}
           <nav className="hidden md:flex space-x-2 items-center">
             <TooltipProvider>
               {navItems.map((item) => (
@@ -53,7 +52,10 @@ const AppLayout = ({ children }) => {
                     <Button
                       asChild
                       variant={location.pathname === item.path ? "secondary" : "ghost"}
-                      className={`px-4 py-2 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 ${location.pathname === item.path ? 'bg-purple-600 text-white shadow-lg' : 'text-slate-300 hover:bg-slate-700 hover:text-white'}`}
+                      className={`px-4 py-2 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 ${location.pathname === item.path
+                        ? "bg-purple-600 text-white shadow-lg"
+                        : "text-slate-300 hover:bg-slate-700 hover:text-white"
+                        }`}
                     >
                       <Link to={item.path} className="flex items-center space-x-2">
                         {item.icon}
@@ -68,30 +70,50 @@ const AppLayout = ({ children }) => {
               ))}
             </TooltipProvider>
           </nav>
-          <div className="md:hidden">
-            <Link to="/">
-              <Button variant="ghost" size="icon">
-                <Home size={24} />
-              </Button>
-            </Link>
+          {/*....................... Desktop Navigation End Here ......................... */}
+
+
+          {/*....................... Mobile Menu Button Start Here ......................... */}
+          <div className="md:hidden relative">
+            <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+              <Home size={24} />
+            </Button>
+
+            {mobileMenuOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-slate-800 border border-slate-700 rounded-md shadow-lg z-50">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className={`block px-4 py-2 text-sm text-slate-200 hover:bg-slate-700 ${location.pathname === item.path ? 'bg-slate-700' : ''
+                      }`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
+          {/*....................... Mobile Menu Button End Here ......................... */}
+
         </div>
       </header>
 
-      <main className="flex-grow container mx-auto px-4 py-8">
-        {children}
-      </main>
+      <main className="flex-grow container mx-auto px-4 py-8">{children}</main>
 
       <footer className="bg-slate-900/80 backdrop-blur-md text-center py-4 text-sm text-slate-400 border-t border-slate-700">
         <p>© {new Date().getFullYear()} MNR Sweaters Ltd. All rights reserved.</p>
         <p>Built by MNR Sweaters Ltd. IT Team</p>
       </footer>
+
       <Toaster />
     </div>
   );
 };
 
-// Helper to calculate duration between two ISO strings
+
+{/*.......................Helper to calculate duration between two ISO strings Start Here ......................... */}
 function calculateDuration(inTime, outTime) {
   if (!inTime || !outTime) return '';
   const start = new Date(inTime);
@@ -102,6 +124,8 @@ function calculateDuration(inTime, outTime) {
   const minutes = Math.floor((ms % 3600000) / 60000);
   return `${hours}h ${minutes}m`;
 }
+{/*.......................Helper to calculate duration between two ISO strings End Here ......................... */}
+
 
 // Export visitors as Excel file
 function handleExportVisitors() {
