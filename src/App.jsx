@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Home, UserPlus, List, Camera, FileText, CalendarDays, BarChart3, Download } from 'lucide-react';
+import { Home,LayoutDashboard, UserPlus, List, Camera, FileText, CalendarDays, BarChart3, Download } from 'lucide-react';
 import VisitorForm from '@/pages/VisitorForm';
 import VisitorList from '@/pages/VisitorList';
 import CalendarView from '@/pages/CalendarView';
@@ -16,20 +16,20 @@ import * as XLSX from 'xlsx';
 
 const AppLayout = ({ children }) => {
   const location = useLocation();
-  const logoUrl = "https://storage.googleapis.com/hostinger-horizons-assets-prod/924959b3-e014-4736-8457-bb0ebc34acf2/d5218e41ff2a37fdb03a046db22ffe47.jpg";
+  const logoUrl = "/icons/icon.svg";
 
   const navItems = [
-    { path: '/', label: 'Home', icon: <Home size={24} /> },
-    { path: '/add-visitor', label: 'Add Visitor', icon: <UserPlus size={24} /> },
+    { path: '/', label: 'Add Visitor', icon: <UserPlus size={24} /> },
+    { path: '/dashboard', label: 'Dashboard', icon: <LayoutDashboard size={24}  /> },
     { path: '/visitor-list', label: 'Visitor List', icon: <List size={24} /> },
   ];
 
- 
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-slate-50 flex flex-col">
       <header className="bg-slate-900/80 backdrop-blur-md shadow-lg sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
@@ -74,7 +74,7 @@ const AppLayout = ({ children }) => {
                 <Home size={24} />
               </Button>
             </Link>
-          </div>  
+          </div>
         </div>
       </header>
 
@@ -170,7 +170,7 @@ function handleImportVisitors(e) {
   reader.readAsArrayBuffer(file);
 }
 
-const HomePage = () => {
+const Dashboard = () => {
   const [showPresent, setShowPresent] = React.useState(false);
 
   // Get all visitors from localStorage
@@ -180,7 +180,7 @@ const HomePage = () => {
 
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -195,7 +195,7 @@ const HomePage = () => {
           icon={<UserPlus size={32} className="text-purple-400" />}
           title="Add Visitor"
           description="Easily add new visitor details like name, phone, purpose of visit, etc."
-          linkTo="/add-visitor"
+          linkTo="/"
         />
         <FeatureCard
           icon={<List size={32} className="text-sky-400" />}
@@ -207,17 +207,17 @@ const HomePage = () => {
           icon={<Camera size={32} className="text-pink-400" />}
           title="Capture Photo"
           description="Take photos of visitors and save them with their profiles. (Feature active)"
-          linkTo="/add-visitor"
+          linkTo="/"
         />
       </div>
       <Button asChild size="lg" className="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white font-semibold shadow-lg transform hover:scale-105 transition-transform duration-300">
-        <Link to="/add-visitor" className="flex items-center space-x-2">
+        <Link to="/" className="flex items-center space-x-2">
           <UserPlus />
           <span>Get Started</span>
         </Link>
       </Button>
 
-      <motion.div 
+      <motion.div
         className="mt-12 p-6 bg-slate-800/50 rounded-xl shadow-xl border border-slate-700"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -226,8 +226,8 @@ const HomePage = () => {
         <h3 className="text-2xl font-semibold text-slate-100 mb-4">Helpful Tools</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-6">
           {/* <ToolItem icon={<FileText className="text-green-400"/>} label="Generate Reports (CSV)" action={handleExportVisitors} /> */}
-          <ToolItem icon={<BarChart3 className="text-red-400"/>} label="Statistics" linkTo="/statistics" />
-          <ToolItem icon={<Download className="text-indigo-400"/>} label="Export Data" action={handleExportVisitors} />
+          <ToolItem icon={<BarChart3 className="text-red-400" />} label="Statistics" linkTo="/statistics" />
+          <ToolItem icon={<Download className="text-indigo-400" />} label="Export Data" action={handleExportVisitors} />
           <ToolItem
             icon={<Download className="text-green-400 rotate-180" />}
             label="Import Data"
@@ -241,7 +241,7 @@ const HomePage = () => {
             style={{ display: 'none' }}
             onChange={handleImportVisitors}
           />
-          <ToolItem icon={<CalendarDays className="text-yellow-400"/>} label="Calendar View" linkTo="/calendar" />
+          <ToolItem icon={<CalendarDays className="text-yellow-400" />} label="Calendar View" linkTo="/calendar" />
           {/* Present/Checkout Visitor Cards with same size/content as Import Data */}
           <Link
             to="/present-visitors"
@@ -289,7 +289,7 @@ const HomePage = () => {
 };
 
 const FeatureCard = ({ icon, title, description, linkTo, onClick, clickable }) => (
-  <motion.div 
+  <motion.div
     className="bg-slate-800/70 p-6 rounded-xl shadow-lg border border-slate-700 hover:shadow-purple-500/30 transition-shadow duration-300 flex flex-col"
     whileHover={{ y: -5 }}
     onClick={clickable ? onClick : undefined}
@@ -305,7 +305,7 @@ const FeatureCard = ({ icon, title, description, linkTo, onClick, clickable }) =
   </motion.div>
 );
 
-const ToolItem = ({icon, label, action, linkTo}) => (
+const ToolItem = ({ icon, label, action, linkTo }) => (
   linkTo ? (
     <Button
       asChild
@@ -335,8 +335,8 @@ const App = () => {
     <Router>
       <AppLayout>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/add-visitor" element={<VisitorForm />} />
+          <Route path="/" element={<VisitorForm />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/visitor-list" element={<VisitorList />} />
           <Route path="/calendar" element={<CalendarView />} />
           <Route path="/statistics" element={<StatisticsView />} />
