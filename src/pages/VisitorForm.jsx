@@ -88,9 +88,9 @@ const VisitorForm = () => {
           description: `${name}'s information has been saved.`,
         });
         resetForm();
-        setTimeout(() => {
-          navigate('/visitor-list');
-        }, 500);
+        // setTimeout(() => {
+        //   navigate('/visitor-list');
+        // }, 500);
       } catch (err) {
         toast({
           variant: "destructive",
