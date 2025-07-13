@@ -173,7 +173,7 @@ const VisitorPhotoUpload = ({ value, onChange }) => {
           </DialogContent>
         </Dialog>
         {/* Upload from File */}
-        <Label htmlFor="photo-upload" className="cursor-pointer bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-4 rounded-md inline-flex items-center transition-colors">
+        <Label htmlFor="photo-upload" className="cursor-pointer bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-3 px-4 rounded-md inline-flex items-center transition-colors">
           <User className="mr-2 h-4 w-4" /> Upload from File
         </Label>
         <Input id="photo-upload" type="file" accept="image/*" onChange={handlePhotoChange} className="hidden" />

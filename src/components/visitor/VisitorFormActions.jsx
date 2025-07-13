@@ -38,7 +38,7 @@ const VisitorFormActions = ({ onReset }) => {
         </AlertDialogContent>
       </AlertDialog>
       <Button type="submit" className="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-black font-semibold shadow-lg">
-        <Save className="mr-2 h-4 w-4" /> Submit Data
+        <Save className="mr-2 h-4 w-4" /> Save Data
       </Button>
     </div>
   );
