@@ -71,7 +71,7 @@ const VisitorEditDialog = ({ visitor, isOpen, onOpenChange, onSave }) => {
           </div>
         </div>
         <DialogFooter>
-          <Button type="button" variant="outline" onClick={() => onOpenChange(false)} className="hover:bg-slate-700">Cancel</Button>
+          <Button type="button" variant="outline" onClick={() => onOpenChange(false)} className="hover:bg-slate-800 hover:text-yellow-50 border-rose-700 bg-slate-900">Cancel</Button>
           <Button type="button" onClick={handleSaveChanges} className="bg-yellow-500 hover:bg-yellow-600 text-white">Save Changes</Button>
         </DialogFooter>
       </DialogContent>
