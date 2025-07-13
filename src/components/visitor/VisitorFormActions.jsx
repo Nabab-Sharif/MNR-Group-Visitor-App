@@ -30,7 +30,7 @@ const VisitorFormActions = ({ onReset }) => {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel className="hover:bg-slate-700">Cancel</AlertDialogCancel>
+            <AlertDialogCancel className="hover:bg-slate-800 hover:text-white border-rose-700 bg-slate-900">Cancel</AlertDialogCancel>
             <AlertDialogAction onClick={onReset} className="bg-yellow-500 hover:bg-yellow-600 text-white">
               Confirm
             </AlertDialogAction>
