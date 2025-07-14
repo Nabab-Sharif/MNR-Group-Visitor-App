@@ -16,7 +16,7 @@ import * as XLSX from 'xlsx';
 
 const AppLayout = ({ children }) => {
   const location = useLocation();
-  const logoUrl = "/icons/icon.svg";
+  const logoUrl = "https://storage.googleapis.com/hostinger-horizons-assets-prod/924959b3-e014-4736-8457-bb0ebc34acf2/d5218e41ff2a37fdb03a046db22ffe47.jpg";
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
