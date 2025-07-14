@@ -107,7 +107,7 @@ const VisitorTable = ({
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                      <AlertDialogCancel className="hover:bg-slate-700">Cancel</AlertDialogCancel>
+                      <AlertDialogCancel className="hover:bg-slate-800 hover:text-white border-rose-700 bg-slate-900">Cancel</AlertDialogCancel>
                       <AlertDialogAction onClick={() => onDelete(visitor.id)} className="bg-red-600 hover:bg-red-700 text-white">
                         Confirm
                       </AlertDialogAction>
