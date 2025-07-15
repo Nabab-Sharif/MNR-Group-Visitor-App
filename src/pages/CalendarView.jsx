@@ -160,7 +160,7 @@ const CalendarView = () => {
                 <div
                   className="rounded-t-2xl transition-all duration-700 group-hover:scale-x-110 relative"
                   style={{
-                    height: `${maxCount ? (count / maxCount) * 200 : 0}px`,
+                    height: `${maxCount ? (count / maxCount) * 128 : 0}px`,
                     width: "38px",
                     background: `linear-gradient(180deg,#a78bfa 70%,#232946 100%)`,
                     boxShadow: `0 12px 40px 0 #a78bfa33, 0 2px 8px 0 #fff2 inset`,
