@@ -4,7 +4,7 @@ import { Printer, UserCircle2, Building, Phone, Briefcase, Edit3, Clock, Hash } 
 import { format } from 'date-fns';
 import { enUS } from 'date-fns/locale';
 
-const VisitorCard = ({ visitor, companyLogoUrl = "https://storage.googleapis.com/hostinger-horizons-assets-prod/924959b3-e014-4736-8457-bb0ebc34acf2/d5218e41ff2a37fdb03a046db22ffe47.jpg", companyName = "MNR Sweaters Ltd." }) => {
+const VisitorCard = ({ visitor, companyLogoUrl = "../../public/icons/icon-192.png", companyName = "MNR Sweaters Ltd." }) => {
   const cardRef = useRef(null);
 
   const handlePrint = () => {

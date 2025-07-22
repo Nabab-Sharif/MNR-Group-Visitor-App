@@ -29,7 +29,7 @@ const VisitorList = () => {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [viewingCardVisitor, setViewingCardVisitor] = useState(null);
   const [isCardDialogOpen, setIsCardDialogOpen] = useState(false);
-  const companyLogoUrl = "https://storage.googleapis.com/hostinger-horizons-assets-prod/924959b3-e014-4736-8457-bb0ebc34acf2/d5218e41ff2a37fdb03a046db22ffe47.jpg";
+  const companyLogoUrl = "../../../public/icons/icon-192.png";
 
 
 
